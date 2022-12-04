@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+const height = ref(0);
+const weight = ref(0);
+const result = ref(0);
+function calBmi() {
+  result.value = weight.value / (height.value / 100) ** 2;
+}
+</script>
 
 <template>
   <h1>เครื่องคำนวณหาค่าดัชนีมวลกาย (BMI)</h1>
@@ -10,13 +18,17 @@
   </p>
   <div>
     <label for="weight">น้ำหนักตัว (kg.)</label>
-    <input id="weigth" />
+    <input id="weigth" v-model="weight" />
   </div>
   <div>
     <label for="height">ส่วนสูง (cm.)</label>
-    <input id="height" />
+    <input id="height" v-model="height" />
   </div>
-  <div><button>คำนวน</button></div>
+  <div><button @click="calBmi">คำนวน</button></div>
+  <div>
+    <div>BMI</div>
+    <div>{{ result }}</div>
+  </div>
   <table>
     <tr>
       <th>BMI kg/m2</th>
